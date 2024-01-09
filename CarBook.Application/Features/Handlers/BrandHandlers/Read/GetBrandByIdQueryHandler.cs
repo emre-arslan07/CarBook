@@ -23,12 +23,20 @@ namespace CarBook.Application.Features.Handlers.BrandHandlers.Read
         public async Task<GetBrandByIdQueryResult> Handle(GetBrandByIdQuery request, CancellationToken cancellationToken)
         {
             var query = await _repository.Get(request.Id);
+            if (query != null)
+            {
             return new GetBrandByIdQueryResult
             {
                 Id = query.ID,
                 Name = query.Name
 
             };
+
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

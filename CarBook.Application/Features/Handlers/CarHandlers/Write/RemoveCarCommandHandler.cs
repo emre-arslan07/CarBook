@@ -22,7 +22,18 @@ namespace CarBook.Application.Features.Handlers.CarHandlers.Write
         public async Task<bool> Handle(RemoveCarCommand request, CancellationToken cancellationToken)
         {
             var query = await _repository.Get(request.Id);
-            return await _repository.Remove(query);
+            if (query == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (await _repository.Remove(query) == true)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
         }
     }
 }

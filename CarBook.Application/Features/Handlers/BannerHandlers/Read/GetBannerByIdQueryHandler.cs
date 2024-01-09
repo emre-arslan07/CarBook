@@ -23,6 +23,8 @@ namespace CarBook.Application.Features.Handlers.BannerHandlers.Read
         public async Task<GetBannerByIdQueryResult> Handle(GetBannerByIdQuery request, CancellationToken cancellationToken)
         {
             var query = await _repository.Get(request.Id);
+            if (query != null)
+            {
             return new GetBannerByIdQueryResult
             {
                 Id=query.ID,
@@ -31,6 +33,12 @@ namespace CarBook.Application.Features.Handlers.BannerHandlers.Read
                 VideoDescription = query.VideoDescription,
                 VideoUrl = query.VideoUrl,
             };
+
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

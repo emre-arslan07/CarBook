@@ -23,11 +23,19 @@ namespace CarBook.Application.Features.Handlers.CategoryHandlers.Read
         public async Task<GetCategoryByIdQueryResult> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
             var query = await _repository.Get(request.Id);
+            if (query != null)
+            {
             return new GetCategoryByIdQueryResult
             {
                 Id = query.ID,
                 Name = query.Name
             };
+
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

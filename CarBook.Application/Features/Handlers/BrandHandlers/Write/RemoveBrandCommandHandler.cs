@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace CarBook.Application.Features.Handlers.BrandHandlers.Write
 {
-    public class DeleteBrandCommandHandler : IRequestHandler<RemoveBrandCommand, bool>
+    public class RemoveBrandCommandHandler : IRequestHandler<RemoveBrandCommand, bool>
     {
         private readonly IRepository<Brand> _repository;
 
-        public DeleteBrandCommandHandler(IRepository<Brand> repository)
+        public RemoveBrandCommandHandler(IRepository<Brand> repository)
         {
             _repository = repository;
         }
@@ -22,7 +22,18 @@ namespace CarBook.Application.Features.Handlers.BrandHandlers.Write
         public async Task<bool> Handle(RemoveBrandCommand request, CancellationToken cancellationToken)
         {
             var query = await _repository.Get(request.Id);
-            return await _repository.Remove(query);
+            if (query == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (await _repository.Remove(query) == true)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
         }
     }
 }

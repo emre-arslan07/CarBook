@@ -23,6 +23,8 @@ namespace CarBook.Application.Features.Handlers.ContactHandlers.Read
         public async Task<GetContactByIdQueryResult> Handle(GetContactByIdQuery request, CancellationToken cancellationToken)
         {
             var query = await _repository.Get(request.Id);
+            if (query != null)
+            {
             return new GetContactByIdQueryResult
             {
                 Id = query.ID,
@@ -32,6 +34,12 @@ namespace CarBook.Application.Features.Handlers.ContactHandlers.Read
                 SendDate = query.SendDate,
                 Subject = query.Subject
             };
+
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

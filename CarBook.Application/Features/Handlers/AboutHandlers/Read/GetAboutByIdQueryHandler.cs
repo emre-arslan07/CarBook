@@ -23,6 +23,8 @@ namespace CarBook.Application.Features.Handlers.AboutHandlers.Read
         public async Task<GetAboutByIdQueryResult> Handle(GetAboutByIdQuery request, CancellationToken cancellationToken)
         {
             var query = await _repository.Get(request.Id);
+            if (query != null)
+            {
             return new GetAboutByIdQueryResult
             {
                 Id = query.ID,
@@ -30,6 +32,12 @@ namespace CarBook.Application.Features.Handlers.AboutHandlers.Read
                 ImageUrl = query.ImageUrl,
                 Title = query.Title
             };
+
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

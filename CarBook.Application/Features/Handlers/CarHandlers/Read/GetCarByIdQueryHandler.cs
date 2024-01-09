@@ -23,6 +23,8 @@ namespace CarBook.Application.Features.Handlers.CarHandlers.Read
         public async Task<GetCarByIdQueryResult> Handle(GetCarByIdQuery request, CancellationToken cancellationToken)
         {
             var query = await _repository.Get(request.Id);
+            if (query != null)
+            {
             return new GetCarByIdQueryResult
             {
                 Id = query.ID,
@@ -37,6 +39,12 @@ namespace CarBook.Application.Features.Handlers.CarHandlers.Read
                 Transmission = query.Transmission,
 
             };
+
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
