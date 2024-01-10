@@ -18,7 +18,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AboutList()
+		[Route("AboutList")]
+		public async Task<IActionResult> AboutList()
         {
             var values = await _mediator.Send(new GetAboutQuery());
             if (values != null)
