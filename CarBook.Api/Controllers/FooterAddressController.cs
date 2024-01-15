@@ -19,7 +19,9 @@ namespace CarBook.Api.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> FooterAddressList()
+		[Route("FooterAddressList")]
+
+		public async Task<IActionResult> FooterAddressList()
         {
             var values = await _mediator.Send(new GetFooterAddressQuery());
             if (values != null)
@@ -41,6 +43,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateFooterAddress")]
+
         public async Task<IActionResult> CreateFooterAddress(CreateFooterAddressCommand command)
         {
             var values = await _mediator.Send(command);

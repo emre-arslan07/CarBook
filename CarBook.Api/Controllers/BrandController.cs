@@ -20,7 +20,9 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> BrandList()
+		[Route("BrandList")]
+
+		public async Task<IActionResult> BrandList()
         {
             var values = await _mediator.Send(new GetBrandQuery());
             if (values != null)
@@ -42,6 +44,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateBrand")]
+
         public async Task<IActionResult> CreateBrand(CreateBrandCommand command)
         {
             var values = await _mediator.Send(command);

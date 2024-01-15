@@ -18,7 +18,9 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> FeatureList()
+		[Route("FeatureList")]
+
+		public async Task<IActionResult> FeatureList()
         {
             var values = await _mediator.Send(new GetFeatureQuery());
             if (values != null)
@@ -40,6 +42,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateFeature")]
+
         public async Task<IActionResult> CreateFeature(CreateFeatureCommand command)
         {
             var values = await _mediator.Send(command);

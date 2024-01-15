@@ -19,7 +19,8 @@ namespace CarBook.Api.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> SocialMediaList()
+		[Route("SocialMediaList")]
+		public async Task<IActionResult> SocialMediaList()
         {
             var values = await _mediator.Send(new GetSocialMediaQuery());
             if (values != null)
@@ -41,6 +42,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateSocialMedia")]
+
         public async Task<IActionResult> CreateSocialMedia(CreateSocialMediaCommand command)
         {
             var values = await _mediator.Send(command);

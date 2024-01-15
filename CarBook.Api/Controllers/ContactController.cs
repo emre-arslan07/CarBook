@@ -18,6 +18,7 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet]
+        [Route("ContactList")]
         public async Task<IActionResult> ContactList()
         {
             var values = await _mediator.Send(new GetContactQuery());
@@ -40,6 +41,7 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateContact")]
         public async Task<IActionResult> CreateContact(CreateContactCommand command)
         {
             var values = await _mediator.Send(command);

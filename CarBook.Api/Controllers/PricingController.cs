@@ -19,7 +19,9 @@ namespace CarBook.Api.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> PricingList()
+		[Route("PricingList")]
+
+		public async Task<IActionResult> PricingList()
         {
             var values = await _mediator.Send(new GetPricingQuery());
             if (values != null)
@@ -41,6 +43,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreatePricing")]
+
         public async Task<IActionResult> CreatePricing(CreatePricingCommand command)
         {
             var values = await _mediator.Send(command);

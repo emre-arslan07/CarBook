@@ -20,7 +20,9 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> BannerList()
+		[Route("BannerList")]
+
+		public async Task<IActionResult> BannerList()
         {
             var values = await _mediator.Send(new GetBannerQuery());
             if (values != null)
@@ -42,6 +44,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateBanner")]
+
         public async Task<IActionResult> CreateBanner(CreateBannerCommand command)
         {
             var values = await _mediator.Send(command);

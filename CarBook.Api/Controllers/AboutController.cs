@@ -40,6 +40,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateAbout")]
+
         public async Task<IActionResult> CreateAbout(CreateAboutCommand command)
         {
             var values = await _mediator.Send(command);

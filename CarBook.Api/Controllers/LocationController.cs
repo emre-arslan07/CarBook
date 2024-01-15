@@ -18,7 +18,9 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LocationList()
+		[Route("LocationList")]
+
+		public async Task<IActionResult> LocationList()
         {
             var values = await _mediator.Send(new GetLocationQuery());
             if (values != null)
@@ -40,6 +42,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateLocation")]
+
         public async Task<IActionResult> CreateLocation(CreateLocationCommand command)
         {
             var values = await _mediator.Send(command);

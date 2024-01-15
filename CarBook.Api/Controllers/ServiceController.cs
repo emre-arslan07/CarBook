@@ -18,7 +18,9 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ServiceList()
+		[Route("ServiceList")]
+
+		public async Task<IActionResult> ServiceList()
         {
             var values = await _mediator.Send(new GetServiceQuery());
             if (values != null)
@@ -40,6 +42,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateService")]
+
         public async Task<IActionResult> CreateService(CreateServiceCommand command)
         {
             var values = await _mediator.Send(command);

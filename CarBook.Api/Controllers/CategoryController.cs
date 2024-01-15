@@ -18,7 +18,9 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CategoryList()
+		[Route("CategoryList")]
+
+		public async Task<IActionResult> CategoryList()
         {
             var values = await _mediator.Send(new GetCategoryQuery());
             if (values != null)
@@ -40,6 +42,8 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
+        [Route("CreateCategory")]
+
         public async Task<IActionResult> CreateCategory(CreateCategoryCommand command)
         {
             var values = await _mediator.Send(command);
