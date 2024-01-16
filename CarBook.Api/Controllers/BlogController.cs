@@ -1,5 +1,5 @@
-﻿using CarBook.Application.Features.Commands.CarCommands;
-using CarBook.Application.Features.Queries.CarQueries;
+﻿using CarBook.Application.Features.Commands.BlogCommands;
+using CarBook.Application.Features.Queries.BlogQueries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,21 +8,22 @@ namespace CarBook.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarController : ControllerBase
+    public class BlogController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public CarController(IMediator mediator)
+        public BlogController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
+
         [HttpGet]
-		[Route("CarList")]
+        [Route("BlogList")]
 
-		public async Task<IActionResult> CarList()
+        public async Task<IActionResult> BlogList()
         {
-            var values = await _mediator.Send(new GetCarQuery());
+            var values = await _mediator.Send(new GetBlogQuery());
             if (values != null)
             {
                 return Ok(values);
@@ -30,21 +31,12 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("GetCarWithBrand")]
-        public async Task<IActionResult> CarListWithBrand()
-        {
-            var values = await _mediator.Send(new GetCarWithBrandQuery());
-            if (values != null)
-            {
-                return Ok(values);
-            }
-            else { return BadRequest("İşlem başarısız"); }
-        }
+        [HttpGet]
+        [Route("Last3BlogsWithAuthor")]
 
-        [HttpGet("Last5CarsListWithBrand")]
-        public async Task<IActionResult> Last5CarsListWithBrand()
+        public async Task<IActionResult> Last3BlogsWithAuthor()
         {
-            var values = await _mediator.Send(new GetLast5CarsWithBrandQuery());
+            var values = await _mediator.Send(new GetLast3BlogsWithAuthorQuery());
             if (values != null)
             {
                 return Ok(values);
@@ -53,9 +45,9 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCar(int id)
+        public async Task<IActionResult> GetBlog(int id)
         {
-            var values = await _mediator.Send(new GetCarByIdQuery(id));
+            var values = await _mediator.Send(new GetBlogByIdQuery(id));
             if (values != null)
             {
                 return Ok(values);
@@ -64,9 +56,9 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost]
-        [Route("CreateCar")]
+        [Route("CreateBlog")]
 
-        public async Task<IActionResult> CreateCar(CreateCarCommand command)
+        public async Task<IActionResult> CreateBlog(CreateBlogCommand command)
         {
             var values = await _mediator.Send(command);
             if (values == true)
@@ -77,9 +69,9 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> RemoveCar(int id)
+        public async Task<IActionResult> RemoveBlog(int id)
         {
-            var values = await _mediator.Send(new RemoveCarCommand(id));
+            var values = await _mediator.Send(new RemoveBlogCommand(id));
             if (values == true)
             {
                 return Ok("İşlem başarılı");
@@ -88,7 +80,7 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCar(UpdateCarCommand command)
+        public async Task<IActionResult> UpdateBlog(UpdateBlogCommand command)
         {
             var values = await _mediator.Send(command);
             if (values == true)

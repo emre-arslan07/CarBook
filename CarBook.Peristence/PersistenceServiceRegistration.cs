@@ -1,8 +1,10 @@
 ﻿using CarBook.Application.Interfaces;
+using CarBook.Application.Interfaces.BlogRepository;
 using CarBook.Application.Interfaces.CarInterfaces;
 using CarBook.Domain.Entities;
 using CarBook.Peristence.Context;
 using CarBook.Peristence.Repositories;
+using CarBook.Peristence.Repositories.BlogRepository;
 using CarBook.Peristence.Repositories.CarRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,7 @@ namespace CarBook.Peristence
             services.AddDbContext<CarBookDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("CarBookConnectionString")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
+            services.AddScoped(typeof(IBlogRepository), typeof(BlogRepository));
             services.AddScoped(typeof(IAboutRepository), typeof(AboutRepository));
 
 
