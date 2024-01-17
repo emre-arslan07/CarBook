@@ -9,6 +9,8 @@ namespace CarBook.Ui.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            ViewBag.v1 = "İletişim";
+            ViewBag.v2 = "Bize Ulaşın";
             return View();
         }
 

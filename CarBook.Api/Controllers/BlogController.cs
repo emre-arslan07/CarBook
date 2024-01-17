@@ -44,6 +44,19 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
+        [HttpGet]
+        [Route("BlogsWithAuthor")]
+
+        public async Task<IActionResult> BlogsWithAuthor()
+        {
+            var values = await _mediator.Send(new GetBlogWithAuthorQuery());
+            if (values != null)
+            {
+                return Ok(values);
+            }
+            else { return BadRequest("İşlem başarısız"); }
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBlog(int id)
         {

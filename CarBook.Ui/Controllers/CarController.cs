@@ -1,4 +1,5 @@
 ﻿using CarBook.DTO.CarDTOs;
+using CarBook.DTO.CarPricingDTOs;
 using CarBook.Ui.ApiProvider;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,9 @@ namespace CarBook.Ui.Controllers
     {
         public async  Task<IActionResult> Index()
         {
-            return View(await GenericApiProvider<ResultCarDTO>.GetListAsync("Car", "GetCarWithBrand")); 
+            ViewBag.v1 = "Arabalar";
+            ViewBag.v2 = "Araçlarımız";
+            return View(await GenericApiProvider<ResultCarPricingWithCarDTO>.GetListAsync("CarPricing", "GetCarPricingWithCarList")); 
         }
     }
 }
