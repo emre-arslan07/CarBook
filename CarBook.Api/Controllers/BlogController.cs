@@ -18,8 +18,7 @@ namespace CarBook.Api.Controllers
         }
 
 
-        [HttpGet]
-        [Route("BlogList")]
+        [HttpGet("BlogList")]
 
         public async Task<IActionResult> BlogList()
         {
@@ -31,8 +30,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet]
-        [Route("Last3BlogsWithAuthor")]
+        [HttpGet("Last3BlogsWithAuthor")]
 
         public async Task<IActionResult> Last3BlogsWithAuthor()
         {
@@ -44,8 +42,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet]
-        [Route("BlogsWithAuthor")]
+        [HttpGet("BlogsWithAuthor")]
 
         public async Task<IActionResult> BlogsWithAuthor()
         {
@@ -57,7 +54,19 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("AuthorByBlogId")]
+
+        public async Task<IActionResult> AuthorByBlogId(int id)
+        {
+            var values = await _mediator.Send(new GetAuthorByBlogIdQuery(id));
+            if (values != null)
+            {
+                return Ok(values);
+            }
+            else { return BadRequest("İşlem başarısız"); }
+        }
+
+        [HttpGet("GetBlog")]
         public async Task<IActionResult> GetBlog(int id)
         {
             var values = await _mediator.Send(new GetBlogByIdQuery(id));
@@ -68,8 +77,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreateBlog")]
+        [HttpPost("CreateBlog")]
 
         public async Task<IActionResult> CreateBlog(CreateBlogCommand command)
         {
@@ -81,7 +89,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveBlog")]
         public async Task<IActionResult> RemoveBlog(int id)
         {
             var values = await _mediator.Send(new RemoveBlogCommand(id));
@@ -92,7 +100,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateBlog")]
         public async Task<IActionResult> UpdateBlog(UpdateBlogCommand command)
         {
             var values = await _mediator.Send(command);

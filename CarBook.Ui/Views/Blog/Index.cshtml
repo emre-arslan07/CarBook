@@ -20,7 +20,7 @@
                             <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 0</a></div>
                         </div>
                         <h3 class="heading mt-2"><a href="#">@item.Title</a></h3>
-                        <p>@item.Description.Substring(0,100)...</p>
+                         <p>@(@item.Description.Length > 100 ? @item.Description.Substring(0, item.Description.Substring(0, 130).LastIndexOf(" ")) + "..." : @item.Description + "...")</p>
                         <p><a href="/Blog/BlogDetail/@item.Id" class="btn btn-primary">Devamını Oku... <span class="icon-long-arrow-right"></span></a></p>
                     </div>
                 </div>

@@ -2,12 +2,14 @@
 using CarBook.Application.Interfaces.BlogRepository;
 using CarBook.Application.Interfaces.CarInterfaces;
 using CarBook.Application.Interfaces.CarPricingInterfaces;
+using CarBook.Application.Interfaces.TagCloudInterfaces;
 using CarBook.Domain.Entities;
 using CarBook.Peristence.Context;
 using CarBook.Peristence.Repositories;
 using CarBook.Peristence.Repositories.BlogRepository;
 using CarBook.Peristence.Repositories.CarPricingRepository;
 using CarBook.Peristence.Repositories.CarRepositories;
+using CarBook.Peristence.Repositories.TagCloudRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,7 @@ namespace CarBook.Peristence
             services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
             services.AddScoped(typeof(IBlogRepository), typeof(BlogRepository));
             services.AddScoped(typeof(ICarPricingRepository), typeof(CarPricingRepository));
+            services.AddScoped(typeof(ITagCloudRepository), typeof(TagCloudRepository));
             //services.AddScoped(typeof(IAboutRepository), typeof(AboutRepository));
 
 

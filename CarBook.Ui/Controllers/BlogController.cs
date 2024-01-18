@@ -18,6 +18,7 @@ namespace CarBook.Ui.Controllers
         {
             ViewBag.v1 = "Bloglar";
             ViewBag.v2 = "Blog Detayı Ve Yorumlar ";
+            ViewBag.Id=id;
             return View();
         }
     }

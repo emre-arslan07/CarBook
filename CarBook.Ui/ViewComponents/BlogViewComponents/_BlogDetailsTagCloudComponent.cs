@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarBook.DTO.TagCloudDTOs;
+using CarBook.Ui.ApiProvider;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.Ui.ViewComponents.BlogViewComponents
 {
     public class _BlogDetailsTagCloudComponent:ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int id)
         {
-            return View();
+            return View(await GenericApiProvider<ResultTagCloudByBlogIdDTO>.GetListAsyncById("TagCloud", "TagCloudByBlogId",id));
         }
     }
 }

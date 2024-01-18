@@ -31,7 +31,10 @@ namespace CarBook.Application.Features.Handlers.BlogHandlers.Read
                 CreatedDate = x.CreatedDate,
                 Id=x.ID,
                 Title=x.Title,
-                Description=x.Description
+                Description=x.Description,
+                AuthorDescription=x.Description,
+                AuthorImageUrl=x.Author.ImageUrl,
+                //CategoryName=x.Category.Name
             }).ToList();
         }
     }

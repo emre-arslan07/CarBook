@@ -33,8 +33,9 @@ namespace CarBook.Application.Features.Handlers.BlogHandlers.Read
                     CoverImageUrl = query.CoverImageUrl,
                     CreatedDate = query.CreatedDate,
                     Id = query.ID,
-                    Title = query.Title
-
+                    Title = query.Title,
+                    Description= query.Description,
+                    
                 };
 
             }

@@ -11,5 +11,6 @@ namespace CarBook.Application.Interfaces.BlogRepository
     {
         Task<List<Blog>> GetLast3BlogWithAuthor();
         Task<List<Blog>> GetBlogWithAuthor();
+        Task<List<Blog>> GetAuthorByBlogId(int id);
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarBook.DTO.BlogDTOs;
+using CarBook.Ui.ApiProvider;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.Ui.ViewComponents.BlogViewComponents
 {
@@ -6,7 +8,7 @@ namespace CarBook.Ui.ViewComponents.BlogViewComponents
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            return View(await GenericApiProvider<ResultLast3BlogWithAuthor>.GetListAsync("Blog", "Last3BlogsWithAuthor"));
         }
     }
 }
