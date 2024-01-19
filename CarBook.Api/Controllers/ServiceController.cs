@@ -17,9 +17,7 @@ namespace CarBook.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-		[Route("ServiceList")]
-
+		[HttpGet("ServiceList")]
 		public async Task<IActionResult> ServiceList()
         {
             var values = await _mediator.Send(new GetServiceQuery());
@@ -30,7 +28,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetService")]
         public async Task<IActionResult> GetService(int id)
         {
             var values = await _mediator.Send(new GetServiceByIdQuery(id));
@@ -41,9 +39,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreateService")]
-
+        [HttpPost("CreateService")]
         public async Task<IActionResult> CreateService(CreateServiceCommand command)
         {
             var values = await _mediator.Send(command);
@@ -54,7 +50,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveService")]
         public async Task<IActionResult> RemoveService(int id)
         {
             var values = await _mediator.Send(new RemoveServiceCommand(id));
@@ -65,7 +61,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateService")]
         public async Task<IActionResult> UpdateService(UpdateServiceCommand command)
         {
             var values = await _mediator.Send(command);

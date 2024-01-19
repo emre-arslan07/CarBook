@@ -17,9 +17,7 @@ namespace CarBook.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        [Route("AuthorList")]
-
+        [HttpGet("AuthorList")]
         public async Task<IActionResult> AuthorList()
         {
             var values = await _mediator.Send(new GetAuthorQuery());
@@ -30,7 +28,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetAuthor")]
         public async Task<IActionResult> GetAuthor(int id)
         {
             var values = await _mediator.Send(new GetAuthorByIdQuery(id));
@@ -41,9 +39,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreateAuthor")]
-
+        [HttpPost("CreateAuthor")]
         public async Task<IActionResult> CreateAuthor(CreateAuthorCommand command)
         {
             var values = await _mediator.Send(command);
@@ -54,7 +50,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveAuthor")]
         public async Task<IActionResult> RemoveAuthor(int id)
         {
             var values = await _mediator.Send(new RemoveAuthorCommand(id));
@@ -65,7 +61,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateAuthor")]
         public async Task<IActionResult> UpdateAuthor(UpdateAuthorCommand command)
         {
             var values = await _mediator.Send(command);

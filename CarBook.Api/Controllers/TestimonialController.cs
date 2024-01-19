@@ -18,8 +18,7 @@ namespace CarBook.Api.Controllers
 		}
 
 
-		[HttpGet]
-		[Route("TestimonialList")]
+		[HttpGet("TestimonialList")]
 		public async Task<IActionResult> TestimonialList()
 		{
 			var values = await _mediator.Send(new GetTestimonialQuery());
@@ -30,7 +29,7 @@ namespace CarBook.Api.Controllers
 			else { return BadRequest("İşlem başarısız"); }
 		}
 
-		[HttpGet("{id}")]
+		[HttpGet("GetTestimonial")]
 		public async Task<IActionResult> GetTestimonial(int id)
 		{
 			var values = await _mediator.Send(new GetTestimonialByIdQuery(id));
@@ -41,9 +40,7 @@ namespace CarBook.Api.Controllers
 			else { return BadRequest("İşlem başarısız"); }
 		}
 
-		[HttpPost]
-        [Route("CreateTestimonial")]
-
+        [HttpPost("CreateTestimonial")]
         public async Task<IActionResult> CreateTestimonial(CreateTestimonialCommand command)
 		{
 			var values = await _mediator.Send(command);
@@ -54,7 +51,7 @@ namespace CarBook.Api.Controllers
 			else { return BadRequest("İşlem başarısız"); }
 		}
 
-		[HttpDelete]
+		[HttpDelete("RemoveTestimonial")]
 		public async Task<IActionResult> RemoveTestimonial(int id)
 		{
 			var values = await _mediator.Send(new RemoveTestimonialCommand(id));
@@ -65,7 +62,7 @@ namespace CarBook.Api.Controllers
 			else { return BadRequest("İşlem başarısız"); }
 		}
 
-		[HttpPut]
+		[HttpPut("UpdateTestimonial")]
 		public async Task<IActionResult> UpdateTestimonial(UpdateTestimonialCommand command)
 		{
 			var values = await _mediator.Send(command);

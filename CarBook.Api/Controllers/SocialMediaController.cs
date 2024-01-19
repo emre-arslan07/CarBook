@@ -18,8 +18,7 @@ namespace CarBook.Api.Controllers
         }
 
 
-        [HttpGet]
-		[Route("SocialMediaList")]
+		[HttpGet("SocialMediaList")]
 		public async Task<IActionResult> SocialMediaList()
         {
             var values = await _mediator.Send(new GetSocialMediaQuery());
@@ -30,7 +29,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetSocialMedia")]
         public async Task<IActionResult> GetSocialMedia(int id)
         {
             var values = await _mediator.Send(new GetSocialMediaByIdQuery(id));
@@ -41,9 +40,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreateSocialMedia")]
-
+        [HttpPost("CreateSocialMedia")]
         public async Task<IActionResult> CreateSocialMedia(CreateSocialMediaCommand command)
         {
             var values = await _mediator.Send(command);
@@ -54,7 +51,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveSocialMedia")]
         public async Task<IActionResult> RemoveSocialMedia(int id)
         {
             var values = await _mediator.Send(new RemoveSocialMediaCommand(id));
@@ -65,7 +62,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateSocialMedia")]
         public async Task<IActionResult> UpdateSocialMedia(UpdateSocialMediaCommand command)
         {
             var values = await _mediator.Send(command);

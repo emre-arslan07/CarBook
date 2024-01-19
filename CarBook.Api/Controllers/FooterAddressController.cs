@@ -18,9 +18,7 @@ namespace CarBook.Api.Controllers
         }
 
 
-        [HttpGet]
-		[Route("FooterAddressList")]
-
+		[HttpGet("FooterAddressList")]
 		public async Task<IActionResult> FooterAddressList()
         {
             var values = await _mediator.Send(new GetFooterAddressQuery());
@@ -31,7 +29,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetFooterAddress")]
         public async Task<IActionResult> GetFooterAddress(int id)
         {
             var values = await _mediator.Send(new GetFooterAddressByIdQuery(id));
@@ -42,9 +40,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreateFooterAddress")]
-
+        [HttpPost("CreateFooterAddress")]
         public async Task<IActionResult> CreateFooterAddress(CreateFooterAddressCommand command)
         {
             var values = await _mediator.Send(command);
@@ -55,7 +51,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveFooterAddress")]
         public async Task<IActionResult> RemoveFooterAddress(int id)
         {
             var values = await _mediator.Send(new RemoveFooterAddressCommand(id));
@@ -66,7 +62,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateFooterAddress")]
         public async Task<IActionResult> UpdateFooterAddress(UpdateFooterAddressCommand command)
         {
             var values = await _mediator.Send(command);

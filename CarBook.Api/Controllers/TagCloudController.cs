@@ -18,7 +18,6 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet("TagCloudList")]
-
         public async Task<IActionResult> TagCloudList()
         {
             var values = await _mediator.Send(new GetTagCloudQuery());
@@ -30,7 +29,6 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet("TagCloudByBlogId")]
-
         public async Task<IActionResult> TagCloudByBlogId(int id)
         {
             var values = await _mediator.Send(new GetTagCloudByBlogIdQuery(id));
@@ -53,7 +51,6 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost("CreateTagCloud")]
-
         public async Task<IActionResult> CreateTagCloud(CreateTagCloudCommand command)
         {
             var values = await _mediator.Send(command);

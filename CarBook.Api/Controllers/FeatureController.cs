@@ -17,9 +17,7 @@ namespace CarBook.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-		[Route("FeatureList")]
-
+		[HttpGet("FeatureList")]
 		public async Task<IActionResult> FeatureList()
         {
             var values = await _mediator.Send(new GetFeatureQuery());
@@ -30,7 +28,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetFeature")]
         public async Task<IActionResult> GetFeature(int id)
         {
             var values = await _mediator.Send(new GetFeatureByIdQuery(id));
@@ -41,8 +39,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreateFeature")]
+        [HttpPost("CreateFeature")]
 
         public async Task<IActionResult> CreateFeature(CreateFeatureCommand command)
         {
@@ -54,7 +51,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveFeature")]
         public async Task<IActionResult> RemoveFeature(int id)
         {
             var values = await _mediator.Send(new RemoveFeatureCommand(id));
@@ -65,7 +62,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateFeature")]
         public async Task<IActionResult> UpdateFeature(UpdateFeatureCommand command)
         {
             var values = await _mediator.Send(command);

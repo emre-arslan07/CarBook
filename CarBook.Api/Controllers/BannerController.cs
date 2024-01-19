@@ -19,9 +19,7 @@ namespace CarBook.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-		[Route("BannerList")]
-
+		[HttpGet("BannerList")]
 		public async Task<IActionResult> BannerList()
         {
             var values = await _mediator.Send(new GetBannerQuery());
@@ -32,7 +30,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetBanner")]
         public async Task<IActionResult> GetBanner(int id)
         {
             var values = await _mediator.Send(new GetBannerByIdQuery(id));
@@ -43,9 +41,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreateBanner")]
-
+        [HttpPost("CreateBanner")]
         public async Task<IActionResult> CreateBanner(CreateBannerCommand command)
         {
             var values = await _mediator.Send(command);
@@ -56,7 +52,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveBanner")]
         public async Task<IActionResult> RemoveBanner(int id)
         {
             var values = await _mediator.Send(new RemoveBannerCommand(id));
@@ -67,7 +63,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateBanner")]
         public async Task<IActionResult> UpdateBanner(UpdateBannerCommand command)
         {
             var values = await _mediator.Send(command);

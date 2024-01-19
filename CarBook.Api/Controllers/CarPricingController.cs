@@ -17,8 +17,7 @@ namespace CarBook.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        [Route("GetCarPricingWithCarList")]
+        [HttpGet("GetCarPricingWithCarList")]
 
         public async Task<IActionResult> GetCarPricingWithCarList()
         {

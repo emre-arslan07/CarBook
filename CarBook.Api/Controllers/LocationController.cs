@@ -17,8 +17,7 @@ namespace CarBook.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-		[Route("LocationList")]
+		[HttpGet("LocationList")]
 
 		public async Task<IActionResult> LocationList()
         {
@@ -30,7 +29,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetLocation")]
         public async Task<IActionResult> GetLocation(int id)
         {
             var values = await _mediator.Send(new GetLocationByIdQuery(id));
@@ -41,9 +40,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreateLocation")]
-
+        [HttpPost("CreateLocation")]
         public async Task<IActionResult> CreateLocation(CreateLocationCommand command)
         {
             var values = await _mediator.Send(command);
@@ -54,7 +51,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveLocation")]
         public async Task<IActionResult> RemoveLocation(int id)
         {
             var values = await _mediator.Send(new RemoveLocationCommand(id));
@@ -65,7 +62,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateLocation")]
         public async Task<IActionResult> UpdateLocation(UpdateLocationCommand command)
         {
             var values = await _mediator.Send(command);

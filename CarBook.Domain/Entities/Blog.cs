@@ -18,5 +18,6 @@ namespace CarBook.Domain.Entities
         public Category Category { get; set; }
         public string Description { get; set; }
         public ICollection<TagCloud> TagClouds { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

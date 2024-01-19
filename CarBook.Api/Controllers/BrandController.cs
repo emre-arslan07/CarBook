@@ -19,9 +19,7 @@ namespace CarBook.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-		[Route("BrandList")]
-
+		[HttpGet("BrandList")]
 		public async Task<IActionResult> BrandList()
         {
             var values = await _mediator.Send(new GetBrandQuery());
@@ -32,7 +30,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetBrand")]
         public async Task<IActionResult> GetBrand(int id)
         {
             var values = await _mediator.Send(new GetBrandByIdQuery(id));
@@ -43,8 +41,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreateBrand")]
+        [HttpPost("CreateBrand")]
 
         public async Task<IActionResult> CreateBrand(CreateBrandCommand command)
         {
@@ -56,7 +53,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemoveBrand")]
         public async Task<IActionResult> RemoveBrand(int id)
         {
             var values = await _mediator.Send(new RemoveBrandCommand(id));
@@ -67,7 +64,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdateBrand")]
         public async Task<IActionResult> UpdateBrand(UpdateBrandCommand command)
         {
             var values = await _mediator.Send(command);

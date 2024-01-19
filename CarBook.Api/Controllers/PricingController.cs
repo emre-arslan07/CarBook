@@ -18,9 +18,7 @@ namespace CarBook.Api.Controllers
         }
 
 
-        [HttpGet]
-		[Route("PricingList")]
-
+		[HttpGet("PricingList")]
 		public async Task<IActionResult> PricingList()
         {
             var values = await _mediator.Send(new GetPricingQuery());
@@ -31,7 +29,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetPricing")]
         public async Task<IActionResult> GetPricing(int id)
         {
             var values = await _mediator.Send(new GetPricingByIdQuery(id));
@@ -42,9 +40,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPost]
-        [Route("CreatePricing")]
-
+        [HttpPost("CreatePricing")]
         public async Task<IActionResult> CreatePricing(CreatePricingCommand command)
         {
             var values = await _mediator.Send(command);
@@ -55,7 +51,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpDelete]
+        [HttpDelete("RemovePricing")]
         public async Task<IActionResult> RemovePricing(int id)
         {
             var values = await _mediator.Send(new RemovePricingCommand(id));
@@ -66,7 +62,7 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
-        [HttpPut]
+        [HttpPut("UpdatePricing")]
         public async Task<IActionResult> UpdatePricing(UpdatePricingCommand command)
         {
             var values = await _mediator.Send(command);

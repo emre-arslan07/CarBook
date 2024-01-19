@@ -19,7 +19,6 @@ namespace CarBook.Api.Controllers
 
 
         [HttpGet("BlogList")]
-
         public async Task<IActionResult> BlogList()
         {
             var values = await _mediator.Send(new GetBlogQuery());
@@ -31,7 +30,6 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet("Last3BlogsWithAuthor")]
-
         public async Task<IActionResult> Last3BlogsWithAuthor()
         {
             var values = await _mediator.Send(new GetLast3BlogsWithAuthorQuery());
@@ -43,7 +41,6 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet("BlogsWithAuthor")]
-
         public async Task<IActionResult> BlogsWithAuthor()
         {
             var values = await _mediator.Send(new GetBlogWithAuthorQuery());
@@ -55,7 +52,6 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpGet("AuthorByBlogId")]
-
         public async Task<IActionResult> AuthorByBlogId(int id)
         {
             var values = await _mediator.Send(new GetAuthorByBlogIdQuery(id));
@@ -78,7 +74,6 @@ namespace CarBook.Api.Controllers
         }
 
         [HttpPost("CreateBlog")]
-
         public async Task<IActionResult> CreateBlog(CreateBlogCommand command)
         {
             var values = await _mediator.Send(command);

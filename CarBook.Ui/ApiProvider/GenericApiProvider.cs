@@ -39,32 +39,32 @@ namespace CarBook.Ui.ApiProvider
         }
 
 
-        [HttpGet]
-        public static async Task<TEntity?> GetByIdTentityAsync(string? controller, string? method, int? id)
-        {
-            var httpClient = new HttpClient();
-            if (method == null)
-            {
-                var responseMessage = await httpClient.GetAsync($"https://localhost:44351/api/{controller}{"/"}{id}");
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    var jsonString = await responseMessage.Content.ReadAsStringAsync();
-                    var values = JsonConvert.DeserializeObject<TEntity>(jsonString);
-                    return values;
-                }
-            }
-            else
-            {
-                var responseMessage = await httpClient.GetAsync($"https://localhost:44351/api/{controller}{"/"}{method}{"/"}{id}");
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    var jsonString = await responseMessage.Content.ReadAsStringAsync();
-                    var values = JsonConvert.DeserializeObject<TEntity>(jsonString);
-                    return values;
-                }
-            }
-            return default(TEntity);
-        }
+        //[HttpGet]
+        //public static async Task<TEntity?> GetByIdTentityAsync(string? controller, string? method, int? id)
+        //{
+        //    var httpClient = new HttpClient();
+        //    if (method == null)
+        //    {
+        //        var responseMessage = await httpClient.GetAsync($"https://localhost:44351/api/{controller}{"/"}{id}");
+        //        if (responseMessage.IsSuccessStatusCode)
+        //        {
+        //            var jsonString = await responseMessage.Content.ReadAsStringAsync();
+        //            var values = JsonConvert.DeserializeObject<TEntity>(jsonString);
+        //            return values;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        var responseMessage = await httpClient.GetAsync($"https://localhost:44351/api/{controller}{"/"}{method}{"/"}{id}");
+        //        if (responseMessage.IsSuccessStatusCode)
+        //        {
+        //            var jsonString = await responseMessage.Content.ReadAsStringAsync();
+        //            var values = JsonConvert.DeserializeObject<TEntity>(jsonString);
+        //            return values;
+        //        }
+        //    }
+        //    return default(TEntity);
+        //}
 
         [HttpGet]
         public static async Task<List<TEntity>> GetListAsyncById(string? controller, string? method,int? id)

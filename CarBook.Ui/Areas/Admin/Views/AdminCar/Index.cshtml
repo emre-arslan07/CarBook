@@ -1,0 +1,59 @@
+﻿@model List<ResultCarWithBrandDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int i = 0;
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    Araçlar  <td><a class="btn btn-outline-success" href="/AdminCar/CreateCar/">Yeni Ekle</a></td>
+                </h4>
+                <p class="card-subtitle mb-4">
+                    Arabalarla ilgili <strong>ekleme</strong>,<strong>silme</strong> ve <strong>güncelleme</strong> işlemlerini bu sayfa üzerinden gerçekleştirebilirsiniz.
+                </p>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Marka</th>
+                                <th>Model</th>
+                                <th>Vites Türü</th>
+                                <th>Km</th>
+                                <th>Sil</th>
+                                <th>Güncelle</th>
+                                <th>Detaylar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                i++;
+                                <tr>
+                                
+                                
+                                <td>@i</td>
+                                <td>@item.BrandName</td>
+                                <td>@item.Model</td>
+                                <td>@item.Transmission</td>
+                                <td>@item.Km</td>
+                                <td><a class="btn btn-outline-danger" href="/AdminCar/RemoveCar/@item.Id">Sil</a></td>
+                                    <td><a class="btn btn-outline-warning" href="/AdminCar/RemoveCar/@item.Id">Güncelle</a></td>
+                                    <td><a class="btn btn-outline-info" href="/AdminCar/RemoveCar/@item.Id">Detaylar</a></td>                               
+                            </tr>
+                            }
+                          
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+ 
+</div>
+
