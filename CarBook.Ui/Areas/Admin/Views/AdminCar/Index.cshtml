@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">
-                    Araçlar  <td><a class="btn btn-outline-success" href="/AdminCar/CreateCar/">Yeni Ekle</a></td>
+                    Araçlar  <td><a class="btn btn-outline-success" href="/Admin/AdminCar/CreateCar/">Yeni Ekle</a></td>
                 </h4>
                 <p class="card-subtitle mb-4">
                     Arabalarla ilgili <strong>ekleme</strong>,<strong>silme</strong> ve <strong>güncelleme</strong> işlemlerini bu sayfa üzerinden gerçekleştirebilirsiniz.
@@ -27,6 +27,7 @@
                                 <th>Sil</th>
                                 <th>Güncelle</th>
                                 <th>Detaylar</th>
+                                <th>Sitede Gör</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,9 +42,12 @@
                                 <td>@item.Model</td>
                                 <td>@item.Transmission</td>
                                 <td>@item.Km</td>
-                                <td><a class="btn btn-outline-danger" href="/AdminCar/RemoveCar/@item.Id">Sil</a></td>
-                                    <td><a class="btn btn-outline-warning" href="/AdminCar/RemoveCar/@item.Id">Güncelle</a></td>
-                                    <td><a class="btn btn-outline-info" href="/AdminCar/RemoveCar/@item.Id">Detaylar</a></td>                               
+                                    <td><a data-id="@item.Id" class="btn btn-outline-danger Delete">Sil</a></td>
+                               
+                                    @* <td><a href="/Admin/AdminCar/RemoveCar/@item.Id" class="btn btn-outline-danger Delete">Sil</a></td> *@
+                                    <td><a class="btn btn-outline-warning" href="/Admin/AdminCar/UpdateCar/@item.Id">Güncelle</a></td>
+                                    <td><a class="btn btn-outline-info" href="/AdminCar/CarDetails/@item.Id">Detaylar</a></td>                               
+                                    <td><a class="btn btn-outline-dark" href="/AdminCar/CarDetails/@item.Id">Sitede Gör</a></td>                               
                             </tr>
                             }
                           
@@ -57,3 +61,44 @@
  
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(".table").on("click", ".Delete", function () {
+        var btn = $(this); //tıklanan butonu yakalar
+        var id = btn.data("id"); //tıklanan datanın id özelliğini getirir
+        Swal.fire({
+            title: 'UYARI!',
+            text: "Seçilen aracı silmek istediğinize emin misiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#5CBA6C',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet',
+            cancelButtonText: 'Hayır'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/AdminCar/RemoveCar/" + id,
+                    success: function (s) {
+                        if (s) {
+                            Swal.fire(
+                                'Başarılı!',
+                                'Seçilen Deneyim Silindi .',
+                                'success'
+                            )
+                            btn.parent().parent().remove();
+                        }
+                    }
+                });
+            }
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'info',
+                    text: 'Silme işlemi yapılmadı'
+                });
+            }
+        });
+    });
+</script>

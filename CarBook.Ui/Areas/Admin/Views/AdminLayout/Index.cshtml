@@ -47,7 +47,8 @@
 
 
    
-
+    @await Component.InvokeAsync("Notyf")
+    @RenderSection("Scripts", required: false)
 </body>
 
 </html>
