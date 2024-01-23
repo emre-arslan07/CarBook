@@ -1,64 +1,52 @@
-﻿@model List<ResultCarWithBrandDTO>
+﻿@model List<ResultBannerDTO>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
-    int i = 0;
 }
 
+<!-- start page title -->
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">
-                    Araçlar  <td><a class="btn btn-outline-success" href="/Admin/AdminCar/CreateCar/">Yeni Ekle</a></td>
+                    Ana Sayfa Banner Alanı <a href="/Admin/AdminBanner/CreateBanner" class="btn btn-outline-primary">Yeni Banner Girişi</a>
                 </h4>
                 <p class="card-subtitle mb-4">
-                    Arabalarla ilgili <strong>ekleme</strong>,<strong>silme</strong> ve <strong>güncelleme</strong> işlemlerini bu sayfa üzerinden gerçekleştirebilirsiniz.
+                    Ana sayfanın banner alanında bulunan bilgileri aşağıdan düzenleyebilirsiniz. 
                 </p>
                 <div class="table-responsive">
                     <table class="table mb-0">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Marka</th>
-                                <th>Model</th>
-                                <th>Vites Türü</th>
-                                <th>Km</th>
+                                <th>Başlık</th>
+                                <th>Açıklama</th>
+                                <th>Video URL</th>
+                                <th>Video Açıklama</th>
                                 <th>Sil</th>
                                 <th>Güncelle</th>
-                                <th>Detaylar</th>
-                                <th>Sitede Gör</th>
-                                <th>Fiyat Bilgileri</th>
+                                <th>Youtube'da Aç</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                i++;
                                 <tr>
-                                
-                                
-                                <td>@i</td>
-                                <td>@item.BrandName</td>
-                                <td>@item.Model</td>
-                                <td>@item.Transmission</td>
-                                <td>@item.Km</td>
-                                    <td><a data-id="@item.Id" class="btn btn-outline-danger Delete">Sil</a></td>                       
-                                    <td><a class="btn btn-outline-warning" href="/Admin/AdminCar/UpdateCar/@item.Id">Güncelle</a></td>
-                                    <td><a class="btn btn-outline-info" href="/AdminCar/CarDetails/@item.Id">Detaylar</a></td>                               
-                                    <td><a class="btn btn-outline-dark" href="/AdminCar/CarDetails/@item.Id">Sitede Gör</a></td>                               
-                                    <td><a class="btn btn-outline-success" href="/AdminCar/CarDetails/@item.Id">Fiyat Bilgileri</a></td>                               
-                            </tr>
+                                    <td>@item.Title</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.VideoUrl</td>
+                                    <td>@item.VideoDescription</td>
+                                    <td><a data-id="@item.Id" class="btn btn-outline-danger Delete">Sil</a></td>
+                                    <td><a href="/Admin/AdminBanner/UpdateBanner/@item.Id" class="btn btn-outline-success">Güncelle</a></td>
+                                    <td><a href="@item.VideoUrl" class="btn btn-outline-dark" target="_blank">Youtube'da Aç</a></td>
+                                </tr>
                             }
-                          
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
- 
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -69,7 +57,7 @@
         var id = btn.data("id"); //tıklanan datanın id özelliğini getirir
         Swal.fire({
             title: 'UYARI!',
-            text: "Seçilen aracı silmek istediğinize emin misiniz?",
+            text: "Seçilen banner'ı silmek istediğinize emin misiniz?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#5CBA6C',
@@ -80,12 +68,12 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: "/Admin/AdminCar/RemoveCar/" + id,
+                    url: "/Admin/AdminBanner/RemoveBanner/" + id,
                     success: function (s) {
                         if (s) {
                             Swal.fire(
                                 'Başarılı!',
-                                'Seçilen Araç Silindi .',
+                                'Seçilen Banner Silindi .',
                                 'success'
                             )
                             btn.parent().parent().remove();

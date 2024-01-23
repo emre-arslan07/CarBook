@@ -1,4 +1,4 @@
-﻿@model List<ResultCarWithBrandDTO>
+﻿@model List<ResultCategoryDTO>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
@@ -10,25 +10,20 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">
-                    Araçlar  <td><a class="btn btn-outline-success" href="/Admin/AdminCar/CreateCar/">Yeni Ekle</a></td>
+                    Blog Kategorileri Listesi  <a href="/Admin/AdminCategory/CreateCategory" class="btn btn-outline-primary">Yeni Kategori Girişi</a>
                 </h4>
                 <p class="card-subtitle mb-4">
-                    Arabalarla ilgili <strong>ekleme</strong>,<strong>silme</strong> ve <strong>güncelleme</strong> işlemlerini bu sayfa üzerinden gerçekleştirebilirsiniz.
+                    Bloglara ait kategorilerle ilgili işlemlerin gerçekleştirileceği sayfadır. Kategori girişi yaparken bilgileri eksiksiz girmeye özen gösterelim.
                 </p>
                 <div class="table-responsive">
                     <table class="table mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Marka</th>
-                                <th>Model</th>
-                                <th>Vites Türü</th>
-                                <th>Km</th>
+                                <th>Kategori Adı</th>
                                 <th>Sil</th>
                                 <th>Güncelle</th>
-                                <th>Detaylar</th>
-                                <th>Sitede Gör</th>
-                                <th>Fiyat Bilgileri</th>
+                                <th>Kategoriye Ait Bloglar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,30 +31,21 @@
                             {
                                 i++;
                                 <tr>
-                                
-                                
-                                <td>@i</td>
-                                <td>@item.BrandName</td>
-                                <td>@item.Model</td>
-                                <td>@item.Transmission</td>
-                                <td>@item.Km</td>
-                                    <td><a data-id="@item.Id" class="btn btn-outline-danger Delete">Sil</a></td>                       
-                                    <td><a class="btn btn-outline-warning" href="/Admin/AdminCar/UpdateCar/@item.Id">Güncelle</a></td>
-                                    <td><a class="btn btn-outline-info" href="/AdminCar/CarDetails/@item.Id">Detaylar</a></td>                               
-                                    <td><a class="btn btn-outline-dark" href="/AdminCar/CarDetails/@item.Id">Sitede Gör</a></td>                               
-                                    <td><a class="btn btn-outline-success" href="/AdminCar/CarDetails/@item.Id">Fiyat Bilgileri</a></td>                               
-                            </tr>
+                                    <td>@i</td>
+                                    <td>@item.Name</td>
+                                    <td><a data-itemid="@item.Id" class="btn btn-outline-danger Delete">Sil</a></td>
+                                    <td><a href="/Admin/AdminCategory/UpdateCategory/@item.Id" class="btn btn-outline-success">Güncelle</a></td>
+                                    <td><a href="/Admin/AdminCategory/#/@item.Id" class="btn btn-outline-dark">Kategoriye Ait Bloglar</a></td>
+                                </tr>
                             }
-                          
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
- 
 </div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -69,7 +55,7 @@
         var id = btn.data("id"); //tıklanan datanın id özelliğini getirir
         Swal.fire({
             title: 'UYARI!',
-            text: "Seçilen aracı silmek istediğinize emin misiniz?",
+            text: "Seçilen kategoriyi silmek istediğinize emin misiniz?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#5CBA6C',
@@ -80,12 +66,12 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: "/Admin/AdminCar/RemoveCar/" + id,
+                    url: "/Admin/AdminCategory/RemoveCategory/" + id,
                     success: function (s) {
                         if (s) {
                             Swal.fire(
                                 'Başarılı!',
-                                'Seçilen Araç Silindi .',
+                                'Seçilen Kategori Silindi .',
                                 'success'
                             )
                             btn.parent().parent().remove();
