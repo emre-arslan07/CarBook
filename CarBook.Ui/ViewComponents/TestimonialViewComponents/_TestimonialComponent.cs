@@ -8,7 +8,7 @@ namespace CarBook.Ui.ViewComponents.TestimonialViewComponents
 	{
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			return View(await GenericApiProvider<TestimonialDTO>.GetListAsync("Testimonial", "TestimonialList"));
+			return View(await GenericApiProvider<ResultTestimonialDTO>.GetListAsync("Testimonial", "TestimonialList"));
 		}
 	}
 }

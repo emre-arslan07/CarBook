@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarBook.DTO.TestimonialDTOs
 {
-	public class TestimonialDTO
+	public class ResultTestimonialDTO
 	{
         public int Id { get; set; }
 		public string Name { get; set; }

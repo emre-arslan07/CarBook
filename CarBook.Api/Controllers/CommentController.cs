@@ -39,6 +39,17 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
+        [HttpGet("GetCommentsByBlogId")]
+        public async Task<IActionResult> GetCommentsByBlogId(int id)
+        {
+            var values = await _mediator.Send(new GetCommentsByBlogIdQuery(id));
+            if (values != null)
+            {
+                return Ok(values);
+            }
+            else { return BadRequest("İşlem başarısız"); }
+        }
+
         [HttpPost("CreateComment")]
         public async Task<IActionResult> CreateComment(CreateCommentCommand command)
         {

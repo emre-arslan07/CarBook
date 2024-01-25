@@ -8,7 +8,7 @@ namespace CarBook.Ui.ViewComponents.FooterAddressComponents
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await GenericApiProvider<FooterAddressDTO>.GetListAsync("FooterAddress", "FooterAddressList"));
+            return View(await GenericApiProvider<ResultFooterAddressDTO>.GetListAsync("FooterAddress", "FooterAddressList"));
         }
     }
 }

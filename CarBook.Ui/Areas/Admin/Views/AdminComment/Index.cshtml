@@ -1,0 +1,77 @@
+﻿@model List<ResultCommentDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int i = 0;
+}
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yorum Listesi</h4>
+                <p class="card-subtitle mb-4">
+                    Bloglarla ilgili o bloga yapılmış olan yorum listesini bu sayfadan görebilirsiniz. İlgili yorumları kaldırabilir ya da tekrar aktif hale getirebilirsiniz. Bunun için yorumların altında yer alan butonları kullanabilirsiniz.
+                </p>
+                @foreach (var item in Model)
+                {
+                    i++;
+                    <div class="col-md-12">
+                        <div class="card">
+                            <h5 class="card-header">Yorum - @i</h5>
+                            <div class="card-body">
+                                <h4 class="card-title">@item.Name</h4>
+                                <p class="card-text">
+                                    @item.Description
+                                </p>
+                                <a data-id="@item.Id" class="btn btn-primary waves-effect waves-light Delete" style="color:white">Yorumu Kaldır</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(".card").on("click", ".Delete", function () {
+        var btn = $(this); //tıklanan butonu yakalar
+        var id = btn.data("id"); //tıklanan datanın id özelliğini getirir
+        Swal.fire({
+            title: 'UYARI!',
+            text: "Seçilen yorumu'u silmek istediğinize emin misiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#5CBA6C',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet',
+            cancelButtonText: 'Hayır'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/AdminComment/RemoveComment/" + id,
+                    success: function (s) {
+                        if (s) {
+                            Swal.fire(
+                                'Başarılı!',
+                                'Seçilen Yorum Silindi .',
+                                'success'
+                            )
+                            btn.parent().parent().remove();
+                        }
+                    }
+                });
+            }
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'info',
+                    text: 'Silme işlemi yapılmadı'
+                });
+            }
+        });
+    });
+</script>
