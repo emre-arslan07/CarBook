@@ -1,5 +1,6 @@
 ﻿using CarBook.Application.Features.Commands.CarCommands;
 using CarBook.Application.Features.Queries.CarQueries;
+using CarBook.Application.Features.Queries.StatisticQueries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,8 @@ namespace CarBook.Api.Controllers
             }
             else { return BadRequest("İşlem başarısız"); }
         }
+
+        
 
         [HttpGet("GetCarWithBrand")]
         public async Task<IActionResult> CarListWithBrand()
