@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace CarBook.Domain.Entities
 {
-    public class Location:BaseEntity
+    public class Customer:BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<RentACar> RentACars { get; set; }
+        public string SurName { get; set; }
+        public string Mail { get; set; }
+        public ICollection<RentACarProcess> RentACarProcesses { get; set; }
     }
 }

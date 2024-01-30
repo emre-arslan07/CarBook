@@ -168,8 +168,77 @@ namespace CarBook.Ui.Areas.Admin.Controllers
                 ViewBag.carCountByFuelGasolineOrDiesel = carCountByFuelGasolineOrDiesel.CarCountByFuelGasolineOrDiesel;
                 ViewBag.carCountByFuelGasolineOrDieselRandom = RandomNumber();
             }
+            #endregion
+
+            #region carCountByFuelElectric
+            var carCountByFuelElectric = await GenericApiProvider<ResultStatisticDTO>.GetStatisticAsync("Statistic", "GetCarCountByFuelElectric");
+            if (carCountByFuelElectric == null)
+            {
+                ViewBag.carCountByFuelElectric = 0;
+                ViewBag.carCountByFuelElectricRandom = RandomNumber();
+            }
+            else
+            {
+                ViewBag.carCountByFuelElectric = carCountByFuelElectric.CarCountByFuelElectric;
+                ViewBag.carCountByFuelElectricRandom = RandomNumber();
+            }
             #endregion  
 
+            #region carBrandAndModelByRentPriceDailyMax
+            var carBrandAndModelByRentPriceDailyMax = await GenericApiProvider<ResultStatisticDTO>.GetStatisticAsync("Statistic", "GetCarBrandAndModelByRentPriceDailyMax");
+            if (carBrandAndModelByRentPriceDailyMax == null)
+            {
+                ViewBag.carBrandAndModelByRentPriceDailyMax = 0;
+                ViewBag.carBrandAndModelByRentPriceDailyMaxRandom = RandomNumber();
+            }
+            else
+            {
+                ViewBag.carBrandAndModelByRentPriceDailyMax = carBrandAndModelByRentPriceDailyMax.CarBrandAndModelByRentPriceDailyMax;
+                ViewBag.carBrandAndModelByRentPriceDailyMaxRandom = RandomNumber();
+            }
+            #endregion
+
+            #region carBrandAndModelByRentPriceDailyMin
+            var carBrandAndModelByRentPriceDailyMin = await GenericApiProvider<ResultStatisticDTO>.GetStatisticAsync("Statistic", "GetCarBrandAndModelByRentPriceDailyMin");
+            if (carBrandAndModelByRentPriceDailyMin == null)
+            {
+                ViewBag.carBrandAndModelByRentPriceDailyMin = 0;
+                ViewBag.carBrandAndModelByRentPriceDailyMinRandom = RandomNumber();
+            }
+            else
+            {
+                ViewBag.carBrandAndModelByRentPriceDailyMin = carBrandAndModelByRentPriceDailyMin.CarBrandAndModelByRentPriceDailyMin;
+                ViewBag.carBrandAndModelByRentPriceDailyMinRandom = RandomNumber();
+            }
+            #endregion
+
+            #region brandNameByMaxCar
+            var brandNameByMaxCar = await GenericApiProvider<ResultStatisticDTO>.GetStatisticAsync("Statistic", "GetBrandNameByMaxCar");
+            if (brandNameByMaxCar == null)
+            {
+                ViewBag.brandNameByMaxCar = 0;
+                ViewBag.brandNameByMaxCarRandom = RandomNumber();
+            }
+            else
+            {
+                ViewBag.brandNameByMaxCar = brandNameByMaxCar.BrandNameByMaxCar;
+                ViewBag.brandNameByMaxCarRandom = RandomNumber();
+            }
+            #endregion
+
+            #region blogTitleByMaxBlogComment
+            var blogTitleByMaxBlogComment = await GenericApiProvider<ResultStatisticDTO>.GetStatisticAsync("Statistic", "GetBlogTitleByMaxBlogComment");
+            if (blogTitleByMaxBlogComment == null)
+            {
+                ViewBag.blogTitleByMaxBlogComment = 0;
+                ViewBag.blogTitleByMaxBlogCommentRandom = RandomNumber();
+            }
+            else
+            {
+                ViewBag.blogTitleByMaxBlogComment = blogTitleByMaxBlogComment.BlogTitleByMaxBlogComment;
+                ViewBag.blogTitleByMaxBlogCommentRandom = RandomNumber();
+            }
+            #endregion  
             return View();
            
         }

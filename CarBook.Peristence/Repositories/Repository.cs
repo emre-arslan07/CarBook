@@ -38,7 +38,7 @@ namespace CarBook.Peristence.Repositories
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<List<T>> GetList(Expression<Func<T, bool>> filter=null)
+        public async Task<List<T>> GetList(Expression<Func<T, bool>> filter/*=null*/)
         {
             return (filter == null ?
                    await _context.Set<T>().ToListAsync() :

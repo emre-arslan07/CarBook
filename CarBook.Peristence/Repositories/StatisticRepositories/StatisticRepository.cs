@@ -1,6 +1,7 @@
 ﻿using CarBook.Application.Interfaces.StatisticInterfaces;
 using CarBook.Domain.Entities;
 using CarBook.Peristence.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,14 @@ namespace CarBook.Peristence.Repositories.StatisticRepositories
 
         public string GetBlogTitleByMaxBlogComment()
         {
-            throw new NotImplementedException();
+            var values = _context.Comments.GroupBy(x => x.BlogId).
+                Select(y => new
+                {
+                    BlogId = y.Key,
+                    Count = y.Count(),
+                }).OrderByDescending(z=>z.Count).Take(1).FirstOrDefault();
+            var blogTitle=_context.Blogs.Where(x=>x.ID==values.BlogId).Select(x=>x.Title).FirstOrDefault();
+            return blogTitle;
         }
 
         public int GetBrandCount()
@@ -56,17 +64,33 @@ namespace CarBook.Peristence.Repositories.StatisticRepositories
 
         public string GetBrandNameByMaxCar()
         {
-            throw new NotImplementedException();
+            var values = _context.Cars.GroupBy(x => x.BrandId).
+                Select(y => new
+                {
+                     BrandId=y.Key,
+                     Count=y.Count()
+                }).OrderByDescending(z=>z.Count).Take(1).FirstOrDefault();
+            string brandName=_context.Brands.Where(x=>x.ID==values.BrandId).Select(y=>y.Name).FirstOrDefault();
+            return brandName;
         }
 
         public string GetCarBrandAndModelByRentPriceDailyMax()
         {
-            throw new NotImplementedException();
+            //Select * From CarPricings where Amount=(Select Max(Amount) From CarPricings where PricingID=3)
+            int pricingId =_context.Pricings.Where(x => x.Name == "Günlük").Select(y => y.ID).FirstOrDefault();
+            decimal amount = _context.CarPricings.Where(x => x.PricingId == pricingId).Max(x => x.Amount);
+            int carId=_context.CarPricings.Where(x=>x.Amount==amount).Select(y=>y.CarId).FirstOrDefault();
+            string brandModel=_context.Cars.Where(x=>x.ID==carId).Include(y=>y.Brand).Select(z=>z.Brand.Name +" "+z.Model).FirstOrDefault();
+            return brandModel;
         }
 
         public string GetCarBrandAndModelByRentPriceDailyMin()
         {
-            throw new NotImplementedException();
+            int pricingId = _context.Pricings.Where(x => x.Name == "Günlük").Select(y => y.ID).FirstOrDefault();
+            decimal amount = _context.CarPricings.Where(x => x.PricingId == pricingId).Min(x => x.Amount);
+            int carId = _context.CarPricings.Where(x => x.Amount == amount).Select(y => y.CarId).FirstOrDefault();
+            string brandModel = _context.Cars.Where(x => x.ID == carId).Include(y => y.Brand).Select(z => z.Brand.Name + " " + z.Model).FirstOrDefault();
+            return brandModel;
         }
 
         public int GetCarCount()

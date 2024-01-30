@@ -4,6 +4,7 @@ using CarBook.Peristence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarBook.Peristence.Migrations
 {
     [DbContext(typeof(CarBookDbContext))]
-    partial class CarBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240130144324_add_rentacarprocess")]
+    partial class add_rentacarprocess
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -510,8 +513,8 @@ namespace CarBook.Peristence.Migrations
                     b.Property<int>("DropOffLocation")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("DropOffTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("DropOffTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("PickUpDate")
                         .HasColumnType("Date");
@@ -523,8 +526,8 @@ namespace CarBook.Peristence.Migrations
                     b.Property<int>("PickUpLocation")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("PickUpTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("PickUpTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
