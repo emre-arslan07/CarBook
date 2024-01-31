@@ -65,6 +65,17 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
+        [HttpGet("GetCarWithBrandById")]
+        public async Task<IActionResult> GetCarWithBrandById(int id)
+        {
+            var values = await _mediator.Send(new GetCarWithBrandByIdQuery(id));
+            if (values != null)
+            {
+                return Ok(values);
+            }
+            else { return BadRequest("İşlem başarısız"); }
+        }
+
         [HttpPost("CreateCar")]
 
         public async Task<IActionResult> CreateCar(CreateCarCommand command)

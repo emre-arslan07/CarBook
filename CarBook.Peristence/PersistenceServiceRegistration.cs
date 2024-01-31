@@ -3,6 +3,7 @@ using CarBook.Application.Interfaces.BlogRepository;
 using CarBook.Application.Interfaces.CarInterfaces;
 using CarBook.Application.Interfaces.CarPricingInterfaces;
 using CarBook.Application.Interfaces.CommentInterfaces;
+using CarBook.Application.Interfaces.RentACarInterfaces;
 using CarBook.Application.Interfaces.StatisticInterfaces;
 using CarBook.Application.Interfaces.TagCloudInterfaces;
 using CarBook.Domain.Entities;
@@ -12,6 +13,7 @@ using CarBook.Peristence.Repositories.BlogRepository;
 using CarBook.Peristence.Repositories.CarPricingRepository;
 using CarBook.Peristence.Repositories.CarRepositories;
 using CarBook.Peristence.Repositories.CommentRepositories;
+using CarBook.Peristence.Repositories.RentACarRepositories;
 using CarBook.Peristence.Repositories.StatisticRepositories;
 using CarBook.Peristence.Repositories.TagCloudRepositories;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +39,7 @@ namespace CarBook.Peristence
             services.AddScoped(typeof(ITagCloudRepository), typeof(TagCloudRepository));
             services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository));
             services.AddScoped(typeof(IStatisticRepository), typeof(StatisticRepository));
+            services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepository));
             //services.AddScoped(typeof(IAboutRepository), typeof(AboutRepository));
 
 

@@ -17,10 +17,11 @@ namespace CarBook.Api.Controllers
 			_mediator = mediator;
 		}
 
-		[HttpPost("GetRentACarListByLocation")]
-		public async Task<IActionResult> GetRentACarListByLocation(GetRentACarQuery rentACarQuery)
+		
+		[HttpGet("GetRentACarListByLocation")]
+		public async Task<IActionResult> GetRentACarListByLocation(int Id,bool available)
 		{
-			var values = await _mediator.Send(rentACarQuery);
+			var values = await _mediator.Send(new GetRentACarQuery(Id, available));
 			if (values != null)
 			{
 				return Ok(values);

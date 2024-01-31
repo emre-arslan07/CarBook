@@ -100,8 +100,9 @@ namespace CarBook.Ui.ApiProvider
             return default(TEntity);
         }
 
-        [HttpGet]
-        public static async Task<TEntity?> GetStatisticAsync(string? controller, string? method)
+        [HttpGet]           
+
+		public static async Task<TEntity?> GetStatisticAsync(string? controller, string? method)
         {
             var httpClient = new HttpClient();
             var responseMessage = await httpClient.GetAsync($"https://localhost:44351/api/{controller}{"/"}{method}");
@@ -113,5 +114,19 @@ namespace CarBook.Ui.ApiProvider
             }
             return default(TEntity);
         }
-    }
+
+		[HttpGet]      //GetRentACarListByLocation?Id=7&available=true    
+		public static async Task<List<TEntity>> GetCarListByFilter(string? controller, string? method, int? id,bool? available)
+		{
+			var httpClient = new HttpClient();
+			var responseMessage = await httpClient.GetAsync($"https://localhost:44351/api/{controller}{"/"}{method}{"?Id="}{id}{"&"}{"available="}{available}");
+			if (responseMessage.IsSuccessStatusCode)
+			{
+				var jsonString = await responseMessage.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<List<TEntity>>(jsonString);
+				return values;
+			}
+			return null;
+		}
+	}
 }

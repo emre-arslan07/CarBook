@@ -4,6 +4,7 @@ using CarBook.Peristence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarBook.Peristence.Migrations
 {
     [DbContext(typeof(CarBookDbContext))]
-    partial class CarBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240131143407_add_reservation")]
+    partial class add_reservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -829,7 +832,7 @@ namespace CarBook.Peristence.Migrations
             modelBuilder.Entity("CarBook.Domain.Entities.Reservation", b =>
                 {
                     b.HasOne("CarBook.Domain.Entities.Car", "Car")
-                        .WithMany("Reservations")
+                        .WithMany()
                         .HasForeignKey("CarID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -885,8 +888,6 @@ namespace CarBook.Peristence.Migrations
                     b.Navigation("RentACarProcesses");
 
                     b.Navigation("RentACars");
-
-                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Entities.Category", b =>

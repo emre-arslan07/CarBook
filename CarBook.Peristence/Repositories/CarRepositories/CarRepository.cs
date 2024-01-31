@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,11 @@ namespace CarBook.Peristence.Repositories.CarRepositories
         public async Task<List<Car>> GetCarListWithBrand()
         {
             return await _context.Cars.Include(x => x.Brand).ToListAsync();
+        }
+
+        public  Task<Car> GetCarWithBrandAsync(Expression<Func<Car, bool>> filter)
+        {
+            return  _context.Cars.Where(filter).Include(x => x.Brand).FirstOrDefaultAsync();
         }
 
         public async Task<List<Car>> GetLast5CarsListWithBrand()

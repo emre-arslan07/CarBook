@@ -11,5 +11,7 @@ namespace CarBook.Domain.Entities
     {
         public string Name { get; set; }
         public ICollection<RentACar> RentACars { get; set; }
+        public ICollection<Reservation> PickUpReservation { get; set; }
+        public ICollection<Reservation> DropOffReservation { get; set; }
     }
 }

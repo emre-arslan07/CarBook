@@ -1,0 +1,49 @@
+﻿@model ResultCreateReservationDTO
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<div class="col-md-12 block-9 mb-md-5">
+    <form method="post" class="bg-light p-5 contact-form">
+        <h3 class="alert alert-success">Araç Rezervasyon Formu</h3>
+        <div class="form-group">
+            <input type="hidden" class="form-control" asp-for="CarID" value="@ViewBag.Id" readonly placeholder="@ViewBag.CarModelWithBrand">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control"  readonly placeholder="@ViewBag.CarModelWithBrand">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="Name" placeholder="Adınız">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="Surname" placeholder="Soyadınız">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" asp-for="Email" placeholder="Email Adresiniz">
+        </div>       
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="Phone" placeholder="Telefon Numaranız">
+        </div>
+        <div class="form-group">
+            @Html.DropDownListFor(x => x.PickUpLocationID, (List<SelectListItem>)ViewBag.Location, "Teslim Alınacak Lokasyon", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.DropDownListFor(x => x.DropOffLocationID, (List<SelectListItem>)ViewBag.Location, "Teslim Edilecek Lokasyon", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="Age" placeholder="Yaşınız">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="DriverLicenseYear" placeholder="Ehliyet Yılınız">
+        </div>
+        <div class="form-group">
+            <textarea  cols="30" rows="7" class="form-control" asp-for="Description" placeholder="Varsa Eklemek İstedikleriniz..."></textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Rezervasyonu Tamamla" class="btn btn-primary py-3 px-5">
+        </div>
+    </form>
+
+</div>
+
