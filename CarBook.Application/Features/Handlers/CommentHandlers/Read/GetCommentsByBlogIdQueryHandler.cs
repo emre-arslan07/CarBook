@@ -28,7 +28,8 @@ namespace CarBook.Application.Features.Handlers.CommentHandlers.Read
                 Id = x.ID,
                 CreatedDate = x.CreatedDate,
                 Description = x.Description,
-                Name = x.Name
+                Name = x.Name,
+                Email=x.Email
             }).ToList();
 
         }

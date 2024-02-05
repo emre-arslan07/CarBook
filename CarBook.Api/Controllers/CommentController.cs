@@ -50,6 +50,8 @@ namespace CarBook.Api.Controllers
             else { return BadRequest("İşlem başarısız"); }
         }
 
+       
+
         [HttpPost("CreateComment")]
         public async Task<IActionResult> CreateComment(CreateCommentCommand command)
         {
@@ -79,6 +81,17 @@ namespace CarBook.Api.Controllers
             if (values == true)
             {
                 return Ok("İşlem başarılı");
+            }
+            else { return BadRequest("İşlem başarısız"); }
+        }
+
+        [HttpGet("GetCommentCountByBlogId")]
+        public async Task<IActionResult> GetCommentCountByBlogId(int id)
+        {
+            var values = await _mediator.Send(new GetCommentCountByBlogIdQuery(id));
+            if (values != null)
+            {
+                return Ok(values);
             }
             else { return BadRequest("İşlem başarısız"); }
         }

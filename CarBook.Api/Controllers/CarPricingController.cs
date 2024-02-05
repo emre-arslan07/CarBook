@@ -16,12 +16,24 @@ namespace CarBook.Api.Controllers
         {
             _mediator = mediator;
         }
-
+        
         [HttpGet("GetCarPricingWithCarList")]
 
         public async Task<IActionResult> GetCarPricingWithCarList()
         {
             var values = await _mediator.Send(new GetCarPricingWithCarQuery());
+            if (values != null)
+            {
+                return Ok(values);
+            }
+            else { return BadRequest("İşlem başarısız"); }
+        }
+
+        [HttpGet("GetCarPricingWithTimePeriodList")]
+
+        public async Task<IActionResult> GetCarPricingWithTimePeriodList()
+        {
+            var values = await _mediator.Send(new GetCarPricingWithTimePeriodQuery());
             if (values != null)
             {
                 return Ok(values);

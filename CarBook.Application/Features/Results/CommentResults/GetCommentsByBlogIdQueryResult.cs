@@ -13,5 +13,7 @@ namespace CarBook.Application.Features.Results.CommentResults
         public DateTime CreatedDate { get; set; }
         public string Description { get; set; }
         public int BlogId { get; set; }
+        public string Email { get; set; }
+
     }
 }

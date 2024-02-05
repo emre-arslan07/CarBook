@@ -27,7 +27,8 @@ namespace CarBook.Application.Features.Handlers.CommentHandlers.Write
                 CreatedDate = request.CreatedDate,
                 Description = request.Description,
                 ID = request.Id,
-                Name = request.Name
+                Name = request.Name,
+                Email = request.Email
             });
         }
     }

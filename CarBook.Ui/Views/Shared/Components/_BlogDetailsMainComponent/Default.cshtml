@@ -7,11 +7,12 @@
     @await Component.InvokeAsync("_BlogAuthorAboutComponent", new { id = ViewBag.Id })
 
     <div class="pt-5 mt-5">
-        <h3 class="mb-5">Yorumlar</h3>
+        <h3 class="mb-5">Yorumlar (@ViewBag.CommentCount)</h3>
         
-        @await Component.InvokeAsync("_CommentListByBlogComponent")
-        @await Component.InvokeAsync("_AddCommentComponent")
-
+        @await Component.InvokeAsync("_CommentListByBlogComponent", new { id = ViewBag.Id })
+@*         @await Component.InvokeAsync("_AddCommentComponent", new { id = ViewBag.Id })
+ *@
+        @await Html.PartialAsync("~/Views/Blog/AddComment.cshtml", new { id = ViewBag.Id })
     </div>
 
 </div>

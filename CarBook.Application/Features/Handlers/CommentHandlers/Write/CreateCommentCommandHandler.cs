@@ -24,9 +24,10 @@ namespace CarBook.Application.Features.Handlers.CommentHandlers.Write
             return await _repository.AddAsync(new Comment
             {
                 BlogId = request.BlogId,
-                CreatedDate = request.CreatedDate,
+                CreatedDate = DateTime.Now,
                 Description = request.Description,
-                Name = request.Name
+                Name = request.Name,
+                Email = request.Email,
 
             });
         }
