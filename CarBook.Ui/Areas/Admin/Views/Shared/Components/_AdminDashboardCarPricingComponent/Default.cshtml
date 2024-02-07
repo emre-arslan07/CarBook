@@ -1,0 +1,45 @@
+﻿@model List<ResultCarPricingWithModelBrandDTO>
+<div class="col-xl-6">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Araç Kiralama Ücretleri</h4>
+            <p class="card-subtitle mb-4 font-size-13">
+                Bazı Araçların Günlük&Haftalık&Aylık Kiralama Ücretleri
+            </p>
+
+            <div class="table-responsive">
+                <table class="table table-centered table-hover table-xl mb-0" id="recent-orders">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">Marka&Model</th>
+                            <th class="border-top-0">Kapak Fotoğrafı</th>
+                            <th class="border-top-0">Günlük</th>
+                            <th class="border-top-0">Haftalık</th>
+                            <th class="border-top-0">Aylık</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                        <tr>
+                            <td class="text-truncate">@item.BrandModel</td>
+                                <td class="text-truncate">
+                                    <img src="@item.CoverImageUrl" width="45" height="45" style="display: block;margin-left: auto;  margin-right: auto;" />
+                                </td>
+                                <td class="text-truncate">@item.DailyAmount₺</td>
+                                <td class="text-truncate">@item.WeeklyAmount₺</td>
+                                <td class="text-truncate">@item.MonthlyAmount₺</td>
+
+                        </tr>
+                            }
+                         
+                     
+                    </tbody>
+                </table>
+            </div>
+
+        </div> <!-- end card-body-->
+    </div> <!-- end card-->
+</div>

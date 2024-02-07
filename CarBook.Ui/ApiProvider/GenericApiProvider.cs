@@ -115,7 +115,7 @@ namespace CarBook.Ui.ApiProvider
             return default(TEntity);
         }
 
-		[HttpGet]      //GetRentACarListByLocation?Id=7&available=true    
+		[HttpGet]        
 		public static async Task<List<TEntity>> GetCarListByFilter(string? controller, string? method, int? id,bool? available)
 		{
 			var httpClient = new HttpClient();
@@ -128,5 +128,19 @@ namespace CarBook.Ui.ApiProvider
 			}
 			return null;
 		}
-	}
+
+        [HttpGet]
+        public static async Task<bool> UpdateWithIdAsync(string controller, string method, int id)
+        {
+            var httpClient = new HttpClient();
+            var responseMessage = await httpClient.GetAsync($"https://localhost:44351/api/{controller}{"/"}{method}{"?id="}{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonString = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<bool>(jsonString);
+                return true;
+            }
+            return false;
+        }
+    }
 }

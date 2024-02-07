@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Handlers\CarDescriptionHandlers\Write\" />
     <Folder Include="Features\Handlers\CarPricingHandlers\Write\" />
     <Folder Include="Features\Handlers\RentACarHandlers\Write\" />
     <Folder Include="Features\Handlers\ReservationHandlers\Read\" />

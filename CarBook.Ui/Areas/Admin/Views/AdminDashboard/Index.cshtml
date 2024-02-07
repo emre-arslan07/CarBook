@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0 font-size-18">Dashboard</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            
+            @await Component.InvokeAsync("_AdminDashboardStatisticsComponent")
+            <!-- end row -->
+
+            <div class="row">
+               @await Component.InvokeAsync("_AdminDashboardChart1Component")
+               @await Component.InvokeAsync("_AdminDashboardChart2Component")
+               @await Component.InvokeAsync("_AdminDashboardChart3Component")
+           
+            </div>
+            <!-- end row-->
+
+
+            <div class="row">
+                 <!-- end col -->
+            @await Component.InvokeAsync("_AdminDashboardCarPricingComponent")
+             @await Component.InvokeAsync("_AdminDashboardBlogListComponent")
+
+                 <!-- end col -->
+            </div>
+
+

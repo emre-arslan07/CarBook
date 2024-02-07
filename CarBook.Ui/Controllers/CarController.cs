@@ -7,11 +7,20 @@ namespace CarBook.Ui.Controllers
 {
     public class CarController : Controller
     {
-        public async  Task<IActionResult> Index()
-        {
+        [HttpGet]
+        public async  Task<IActionResult> Index() 
+		{
             ViewBag.v1 = "Arabalar";
             ViewBag.v2 = "Araçlarımız";
             return View(await GenericApiProvider<ResultCarPricingWithCarDTO>.GetListAsync("CarPricing", "GetCarPricingWithCarList")); 
+        }
+		[HttpGet]
+		public async Task<IActionResult> CarDetail(int id)
+        {
+			ViewBag.v1 = "Arabalar";
+			ViewBag.v2 = "Araç Detayları";
+            ViewBag.Id=id;
+			return View();
         }
     }
 }

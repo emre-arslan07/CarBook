@@ -1,5 +1,7 @@
 ﻿using CarBook.Application.Interfaces;
 using CarBook.Application.Interfaces.BlogRepository;
+using CarBook.Application.Interfaces.CarDescriptionInterfaces;
+using CarBook.Application.Interfaces.CarFeatureInterfaces;
 using CarBook.Application.Interfaces.CarInterfaces;
 using CarBook.Application.Interfaces.CarPricingInterfaces;
 using CarBook.Application.Interfaces.CommentInterfaces;
@@ -10,6 +12,8 @@ using CarBook.Domain.Entities;
 using CarBook.Peristence.Context;
 using CarBook.Peristence.Repositories;
 using CarBook.Peristence.Repositories.BlogRepository;
+using CarBook.Peristence.Repositories.CarDescriptionRepositories;
+using CarBook.Peristence.Repositories.CarFeatureRepositories;
 using CarBook.Peristence.Repositories.CarPricingRepository;
 using CarBook.Peristence.Repositories.CarRepositories;
 using CarBook.Peristence.Repositories.CommentRepositories;
@@ -40,6 +44,8 @@ namespace CarBook.Peristence
             services.AddScoped(typeof(ICommentRepository), typeof(CommentRepository));
             services.AddScoped(typeof(IStatisticRepository), typeof(StatisticRepository));
             services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepository));
+            services.AddScoped(typeof(ICarFeatureRepository), typeof(CarFeatureRepository));
+            services.AddScoped(typeof(ICarDescriptonRepository), typeof(CarDescriptionRepository));
             //services.AddScoped(typeof(IAboutRepository), typeof(AboutRepository));
 
 
