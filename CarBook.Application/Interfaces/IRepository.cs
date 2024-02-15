@@ -15,7 +15,8 @@ namespace CarBook.Application.Interfaces
         Task<bool> Update(T model);
 
         Task<List<T>> GetList(Expression<Func<T, bool>> filter = null);
-        Task<List<T>> GetListByFilter(Expression<Func<T, bool>> filter = null);
+        Task<List<T>> GetListByFilter(Expression<Func<T, bool>> filter /*= null*/);
         Task<T> Get(int id);
-    }
+		Task<T> GetSingleAsync(Expression<Func<T, bool>> filter);
+	}
 }

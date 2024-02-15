@@ -4,6 +4,7 @@ using CarBook.Peristence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarBook.Peristence.Migrations
 {
     [DbContext(typeof(CarBookDbContext))]
-    partial class CarBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240214105614_add_reviewClass")]
+    partial class add_reviewClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,61 +48,6 @@ namespace CarBook.Peristence.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Abouts");
-                });
-
-            modelBuilder.Entity("CarBook.Domain.Entities.AppRole", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("AppRoleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("AppRoles");
-                });
-
-            modelBuilder.Entity("CarBook.Domain.Entities.AppUser", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("AppRoleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AppRoleId");
-
-                    b.ToTable("AppUsers");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Entities.Author", b =>
@@ -793,17 +741,6 @@ namespace CarBook.Peristence.Migrations
                     b.ToTable("Testimonials");
                 });
 
-            modelBuilder.Entity("CarBook.Domain.Entities.AppUser", b =>
-                {
-                    b.HasOne("CarBook.Domain.Entities.AppRole", "AppRole")
-                        .WithMany("AppUsers")
-                        .HasForeignKey("AppRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppRole");
-                });
-
             modelBuilder.Entity("CarBook.Domain.Entities.Blog", b =>
                 {
                     b.HasOne("CarBook.Domain.Entities.Author", "Author")
@@ -977,11 +914,6 @@ namespace CarBook.Peristence.Migrations
                         .IsRequired();
 
                     b.Navigation("Blog");
-                });
-
-            modelBuilder.Entity("CarBook.Domain.Entities.AppRole", b =>
-                {
-                    b.Navigation("AppUsers");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Entities.Blog", b =>

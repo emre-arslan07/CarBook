@@ -38,21 +38,26 @@ namespace CarBook.Peristence.Repositories
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<List<T>> GetList(Expression<Func<T, bool>> filter/*=null*/)
+        public async Task<List<T>> GetList(Expression<Func<T, bool>> filter = null)
         {
             return (filter == null ?
                    await _context.Set<T>().ToListAsync() :
                    await _context.Set<T>().Where(filter).ToListAsync());
         }
 
-        public async Task<List<T>> GetListByFilter(Expression<Func<T, bool>> filter = null)
+        public async Task<List<T>> GetListByFilter(Expression<Func<T, bool>> filter/* = null*/)
         {
             return (filter == null ?
                   await _context.Set<T>().ToListAsync() :
                   await _context.Set<T>().Where(filter).ToListAsync());
         }
 
-        public async Task<bool> Remove(T model)
+		public async Task<T> GetSingleAsync(Expression<Func<T, bool>> filter)
+		{
+			return await _context.Set<T>().SingleOrDefaultAsync(filter);
+		}
+
+		public async Task<bool> Remove(T model)
         {
             var deletedEntity = _context.Entry(model);
             deletedEntity.State = EntityState.Deleted;
