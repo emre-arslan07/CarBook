@@ -1,11 +1,13 @@
 ﻿using CarBook.Application.Features.Commands.LocationCommands;
 using CarBook.Application.Features.Queries.LocationQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.Api.Controllers
 {
+    //[Authorize(Roles ="Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class LocationController : ControllerBase

@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.Ui.Controllers
 {
+    [AllowAnonymous]
+
     public class AboutController : Controller
     {
 		[HttpGet]

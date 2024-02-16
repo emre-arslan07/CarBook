@@ -1,9 +1,12 @@
 ﻿using CarBook.DTO.ContactDTOs;
 using CarBook.Ui.ApiProvider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.Ui.Controllers
 {
+    [AllowAnonymous]
+
     public class ContactController : Controller
     {
         [HttpGet]

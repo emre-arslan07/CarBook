@@ -1,10 +1,15 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using CarBook.DTO.LocationDTOs;
 using CarBook.Ui.ApiProvider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace CarBook.Ui.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="Admin")]
     [Area("Admin")]
     [Route("Admin/AdminLocation")]
     public class AdminLocationController : Controller
@@ -19,7 +24,21 @@ namespace CarBook.Ui.Areas.Admin.Controllers
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
-            return View(await GenericApiProvider<ResultLocationDTO>.GetListAsync("Location", "LocationList"));
+            var token=User.Claims.FirstOrDefault(x=>x.Type== "carbooktoken")?.Value;
+            if (token != null)
+            {
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var responseMessage = await client.GetAsync("https://localhost:7060/api/Location/LocationList");
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                    var values = JsonConvert.DeserializeObject<List<ResultLocationDTO>>(jsonData);
+                    return View(values);
+                }
+            }
+            return View();
+            //return View(await GenericApiProvider<ResultLocationDTO>.GetListAsync("Location", "LocationList"));
         }
 
         [HttpGet]

@@ -1,11 +1,23 @@
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(
+    JwtBearerDefaults.AuthenticationScheme, opt =>
+    {
+        opt.LoginPath="/Login/Index/";
+        opt.LogoutPath = "/Login/LogOut/";
+        opt.AccessDeniedPath = "/Pages/AccessDenied/";
+        opt.Cookie.SameSite = SameSiteMode.Strict;
+        opt.Cookie.HttpOnly = true;
+        opt.Cookie.SecurePolicy= CookieSecurePolicy.SameAsRequest;
+        opt.Cookie.Name = "CarBookJwt";
+    });
 builder.Services.AddMvc();
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 
@@ -23,7 +35,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

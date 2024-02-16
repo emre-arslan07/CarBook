@@ -1,10 +1,13 @@
 ﻿using CarBook.DTO.ServiceDTOs;
 using CarBook.Ui.ApiProvider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.Ui.Controllers
 {
-	public class ServiceController : Controller
+    [AllowAnonymous]
+
+    public class ServiceController : Controller
 	{
 		public async Task<IActionResult> Index()
 

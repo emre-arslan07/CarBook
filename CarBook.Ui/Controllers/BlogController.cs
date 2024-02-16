@@ -1,10 +1,13 @@
 ﻿using CarBook.DTO.BlogDTOs;
 using CarBook.DTO.CommentDTOs;
 using CarBook.Ui.ApiProvider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.Ui.Controllers
 {
+    [AllowAnonymous]
+
     public class BlogController : Controller
     {
         public async  Task<IActionResult> Index()

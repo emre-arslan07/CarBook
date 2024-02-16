@@ -1,11 +1,14 @@
 ﻿using CarBook.DTO.AppUserDTOs;
 using CarBook.DTO.CommentDTOs;
 using CarBook.Ui.ApiProvider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.Ui.Controllers
 {
-	public class RegisterController : Controller
+    [AllowAnonymous]
+
+    public class RegisterController : Controller
 	{
 		[HttpGet]
 		public async Task<IActionResult> Index()
